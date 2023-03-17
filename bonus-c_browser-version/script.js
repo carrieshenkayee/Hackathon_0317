@@ -6,8 +6,40 @@ function computerPlay() {
   
   This function should use the return keyword to return a string of either "rock", "paper", or "scissors".
   */
+
+  function gameRockPaperScissors(options) {
+    let randomNumber = Math.floor(Math.random() * options.length);
+    return options[randomNumber]; 
+  }
+
+  
+
+  //let playerMove = prompt("Let's play rock, paper and scissors! What do you choose? (type 'rock' or 'paper' or 'scissors'.)") 
+  //console.log(playerMove)
+
 }
 function playRound(playerSelection, computerSelection) {
+  let rock = 0; paper = 1; scissors = 2
+  let result = playerSelection % 3 - 
+
+  /*function game(playerSelection, computerSelection) {
+
+    if (userChoice === 3 && computer === 1){
+      return `User chose ${userChoice}, Computer chose ${computer}, user Wins!`
+    }else if (computer === 3 && userChoice === 1){
+      return `User chose ${userChoice}, computer chose ${computer}, Computer Wins!`
+    }else if (userChoice < computer){
+      return `Player chose ${userChoice}, Computer Chose ${computer} User Wins! :D`;
+    } else if (userChoice === computer) {
+      return `It's a draw!`
+    }else {
+      return `Player chose ${userChoice}, Computer Chose ${computer} Computer wins :(`;
+    };
+  }*/
+  
+
+
+
   /*
   TODO: Insert your code for your function that decides who the winner is here (from task 2). 
 
