@@ -1,44 +1,39 @@
-const options = ["rock", "paper", "scissors"];
+const options = [
+  { name: "rock", value: 1 },
+  { name: "paper", value: 2 },
+  { name: "scissors", value: 3 },
+];
 
-function computerPlay() {
-  /*
-  TODO: Insert your code for your function that randomly generates a computer move here (from task 4). 
-  
-  This function should use the return keyword to return a string of either "rock", "paper", or "scissors".
-  */
-
-  function gameRockPaperScissors(options) {
-    let randomNumber = Math.floor(Math.random() * options.length);
-    return options[randomNumber]; 
-  }
-
-  
-
-  //let playerMove = prompt("Let's play rock, paper and scissors! What do you choose? (type 'rock' or 'paper' or 'scissors'.)") 
-  //console.log(playerMove)
-
+// 
+function computerPlay(array) {
+  let randomNumber = Math.floor(Math.random() * array.length);
+  console.log(array[randomNumber].value); 
+  return array[randomNumber].value; 
 }
-function playRound(playerSelection, computerSelection) {
-  let rock = 0; paper = 1; scissors = 2
-  let result = playerSelection % 3 - 
+computerPlay(options);
+console.log(options.length);
 
-  /*function game(playerSelection, computerSelection) {
-
-    if (userChoice === 3 && computer === 1){
-      return `User chose ${userChoice}, Computer chose ${computer}, user Wins!`
-    }else if (computer === 3 && userChoice === 1){
-      return `User chose ${userChoice}, computer chose ${computer}, Computer Wins!`
-    }else if (userChoice < computer){
-      return `Player chose ${userChoice}, Computer Chose ${computer} User Wins! :D`;
-    } else if (userChoice === computer) {
-      return `It's a draw!`
-    }else {
-      return `Player chose ${userChoice}, Computer Chose ${computer} Computer wins :(`;
-    };
-  }*/
+function gameRockPaperScissors(options) {
+  
+}
   
 
-
+function playRound(playerSelection, computerSelection) {
+  let result = (playerSelection % 3 - computerSelection % 3 + 3) % 3;  
+  switch(result) {
+    case 0: 
+      return "tie! Try again!";
+      break;
+    case 1: 
+      return "You lose! Loser";
+      break;
+    case 2: 
+      return "You win! Congratulations";
+      break;
+  }
+}
+  
+  
 
   /*
   TODO: Insert your code for your function that decides who the winner is here (from task 2). 
@@ -47,15 +42,18 @@ function playRound(playerSelection, computerSelection) {
 
   For example, if the player's move is rock and the computer's move is scissors, the function should use the return keyword to return "You win!"
   */
-}
+
 function updateResultText(result) {
   const resultText = document.getElementById("result-text");
   resultText.textContent = result;
 }
 function handleClick(event) {
-  const playerSelection = event.target.id;
-  const computerSelection = computerPlay();
+  const playerOption = options.find(option => option.name === event.target.id);
+  const playerSelection = playerOption.value;
+  console.log(playerSelection);
+  const computerSelection = computerPlay(options);
   const result = playRound(playerSelection, computerSelection);
+  playRound(playerSelection, computerSelection);
   updateResultText(result);
 }
 const buttons = document.querySelectorAll(".game-options button");
