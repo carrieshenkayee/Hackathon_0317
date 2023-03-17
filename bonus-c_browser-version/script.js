@@ -1,3 +1,9 @@
+// username input
+let username = prompt("what's your name?");
+if (username.length > 10) {
+  alert("Please use a nickname under 10 characters");
+}
+
 /* STEP 1: 
 Create an array with 3 objects (rock, paper, scissors)
 and each option carries two proporties:
@@ -9,8 +15,6 @@ const options = [
   { name: "paper", value: 2 },
   { name: "scissors", value: 3 },
 ];
-
-
 
 /* STEP 2: 
 Create a function for the computer to randomly select a value (1 or 2 or 3), 
@@ -25,9 +29,28 @@ function computerPlay(array) {
 }
 computerPlay(options);
 
+//clairvoyant computer
+var probability = function(n) {
+  return !!n && Math.random() <= n;
+};
+
+function cheatingComputer(playerSelection) {
+  if(playerSelection = 1) {
+
+  }
+}
+// user selects computers likelihood to win
+// comptuer reads user's input
+// computer uses that probability to select an answer
+// e.g 90% win rate and user chooses scissors then:
+// 90% chance rock 5% chance scissors and 5% chance paper
+
+
+
 function gameRockPaperScissors(options) {
   
 }
+
   
 /*STEP 3:
 Create a funtion to compare playerSelection and computerSelection 
@@ -55,7 +78,7 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-console.log(playRound(1,2));
+
 
 
   
@@ -72,7 +95,7 @@ in order to link back to the id in index.html,
 so the three buttons will be connected to the array(options) by options.name.
 Call function playRound to compare playerSelection and computerSelection.
  */ 
-
+// come back and experiment - figure out why it's double counting
 function handleClick(event) {
   const playerOption = options.find(option => option.name === event.target.id);
   const playerSelection = playerOption.value;
@@ -81,6 +104,12 @@ function handleClick(event) {
   const result = playRound(playerSelection, computerSelection);
   playRound(playerSelection, computerSelection);
   updateResultText(result);
+  console.log(`games played ${gamesPlayed/2}`);
+  console.log(`your score: ${yourScore/2}`);
+  console.log(`computer score: ${computerScore/2}`);
+  document.getElementById('gamesPlayed').innerHTML = `you have played: ${gamesPlayed/2} games`;
+  document.getElementById('yourScore').innerHTML = `${username}'s score is: ${yourScore/2}`;
+  document.getElementById('computerScore').innerHTML = `The computer's score is: ${computerScore/2}`;
 }
 const buttons = document.querySelectorAll(".game-options button");
 buttons.forEach((button) => {
