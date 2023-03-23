@@ -22,23 +22,7 @@ so that it's choice points back to array(options),
 and then we can compare later on with what the player chooses.
 */ 
 
-function computerPlay(array) {
-  let randomNumber = Math.floor(Math.random() * array.length);
-  console.log("Computer: " + array[randomNumber].value); 
-  return array[randomNumber].value; 
-}
-computerPlay(options);
 
-//clairvoyant computer
-var probability = function(n) {
-  return !!n && Math.random() <= n;
-};
-
-function cheatingComputer(playerSelection) {
-  if(playerSelection = 1) {
-
-  }
-}
 // user selects computers likelihood to win
 // comptuer reads user's input
 // computer uses that probability to select an answer
@@ -59,29 +43,32 @@ Then we can assign each case with a different return to announce the result of t
 which can link to a score system in a later stage.
 */
 
+//BONUS: Cheating Computer that it wins 90 percent of the time!
+// Create a new variable called difficulty which determines how difficult for the player to win
+// Create a new variable called luck, which is randomly generated 
+// When difficulty > luck, computer wins. 
+
 let gamesPlayed = 0;
 let yourScore = 0;
 let computerScore = 0;
 
-function playRound(playerSelection, computerSelection) {
-  let result = (playerSelection % 3 - computerSelection % 3 + 3) % 3;  
+function playRound(playerSelection, difficulty) { //line 83
+  let luck = Math.random();
   gamesPlayed++;
-  switch(result) {
-    case 0: 
-      return "tie! Try again!";       
-    case 1: 
-      yourScore++; 
-      return "You win! Congratulations";       
-    case 2: 
-      computerScore++;
-      return "You lose! Loser";      
+  if (difficulty > luck){ // the cheater computer wins!
+    computerScore++;
+    return "You lose! Loser";   
+  } else {
+    if (Math.floor(Math.random() * 2) === 0){
+      return "Tie! Try again!";       
+    } else {
+      yourScore++;
+      return "You win! Congratulations";   
+    }
   }
 }
 
 
-
-
-  
 
 
 function updateResultText(result) {
@@ -98,18 +85,17 @@ Call function playRound to compare playerSelection and computerSelection.
 // come back and experiment - figure out why it's double counting
 function handleClick(event) {
   const playerOption = options.find(option => option.name === event.target.id);
+  const difficulty = 0.9; //0=easiest for player, 1=sure lose for player
   const playerSelection = playerOption.value;
   console.log("You: " + playerSelection);
-  const computerSelection = computerPlay(options);
-  const result = playRound(playerSelection, computerSelection);
-  playRound(playerSelection, computerSelection);
+  const result = playRound(playerSelection, difficulty);
   updateResultText(result);
-  console.log(`games played ${gamesPlayed/2}`);
-  console.log(`your score: ${yourScore/2}`);
-  console.log(`computer score: ${computerScore/2}`);
-  document.getElementById('gamesPlayed').innerHTML = `you have played: ${gamesPlayed/2} games`;
-  document.getElementById('yourScore').innerHTML = `${username}'s score is: ${yourScore/2}`;
-  document.getElementById('computerScore').innerHTML = `The computer's score is: ${computerScore/2}`;
+  console.log(`games played ${gamesPlayed}`);
+  console.log(`your score: ${yourScore}`);
+  console.log(`computer score: ${computerScore}`);
+  document.getElementById('gamesPlayed').innerHTML = `you have played: ${gamesPlayed} games`;
+  document.getElementById('yourScore').innerHTML = `${username}'s score is: ${yourScore}`;
+  document.getElementById('computerScore').innerHTML = `The computer's score is: ${computerScore}`;
 }
 const buttons = document.querySelectorAll(".game-options button");
 buttons.forEach((button) => {
